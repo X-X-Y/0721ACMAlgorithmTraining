@@ -9,7 +9,7 @@ class Solution:
             if citations[mid] >= n-mid:
                 right = mid - 1
             else:
-                left = left + 1
+                left = mid + 1
         return n - left
 
         # 强行遍历
