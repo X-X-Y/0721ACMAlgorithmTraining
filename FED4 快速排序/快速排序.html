@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            const _quickSort = array => {
+                // 补全代码
+                if(array.length < 2) return array
+                
+                let mid = 0
+                let left = [], right = []
+                for(let i = 1; i < array.length; i++){
+                    if(array[i] >= array[mid]){
+                        right.push(array[i])
+                    }else{
+                        left.push(array[i])
+                    }
+                }
+                return _quickSort(left).concat(array[mid], _quickSort(right))
+            }
+        </script>
+    </body>
+</html>
