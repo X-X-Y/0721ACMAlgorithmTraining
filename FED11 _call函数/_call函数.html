@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            // 补全代码
+            Function.prototype._call = function(obj, ...rest){
+                obj = obj || window
+                let fn = Symbol('obj')
+                obj[fn] = this
+                let res = obj[fn](...rest)
+                delete obj[fn]
+                return res
+            }
+        </script>
+    </body>
+</html>
