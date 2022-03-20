@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            // 补全代码
+            class Observerd {
+                constructor(name, state){
+                    this.name = name
+                    this.state = state || "走路"
+                    this.handles = []
+                }
+                
+                setObserver(obs){
+                    this.handles.push(obs)
+                }
+                
+                setState(state){
+                    this.state = state
+                    this.handles.forEach(item => {
+                        item.update(this)
+                    })
+                }
+            }
+
+            class Observer {
+                constructor(){
+                    
+                }
+                
+                update(obsed){
+                    console.log(`${obsed.name}正在${obsed.state}`)
+                }
+            }
+        </script>
+    </body>
+</html>
