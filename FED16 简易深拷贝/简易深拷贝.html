@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            const _sampleDeepClone = target => {
+                // 补全代码
+                let newObj = Array.isArray(target) ? [] : {}
+                
+                if(target instanceof Array || target instanceof Object){
+                    for(let key in target){
+                        newObj[key] = _sampleDeepClone(target[key])
+                    }
+                    return newObj
+                }else{
+                    return target
+                }
+            }
+        </script>
+    </body>
+</html>
