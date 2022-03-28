@@ -1,25 +1,31 @@
-// 超时，通过7/12
+// 超时，通过8/12
 let T = Number(readline())
 while(T--){
-    const N = Number(readline())
+    let N = Number(readline())
     const nums = readline().split("").map(Number)
     const reat = Number(readline())
-    const types = readline().split("")
+    let types = readline().split("")
 
-    types.forEach(item => {
+    let item
+    let start = 0
+    while(types.length){
+        item = types.shift()
         // 第一次出现0的位置
         let pos0
         // 第一次出现1的位置
         let pos1
         
-        for(let i = 0; i < N; i++){
+        for(let i = start; i < N; i++){
             // 第一次碰到0人
             if(nums[i] == 0 && pos0 == undefined)
                 pos0 = i
             // 第一次碰到1人
             if(nums[i] == 1 && pos1 == undefined)
                 pos1 = i
+            if(pos0 != undefined && pos1 != undefined)
+                break
         }
+        start = Math.min(pos0 == undefined ? 99999 : pos0, pos1 == undefined ? 99999 : pos1)
         // pos0 = nums.join("").indexOf("0")
         // pos1 = nums.join("").indexOf("1")
         
@@ -40,5 +46,5 @@ while(T--){
                 console.log(pos1+1)
             }
         }
-    })
+    }
 }
