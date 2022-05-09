@@ -4,7 +4,9 @@
  */
 var threeSum = function(nums) {
     // 已排序数组找出所有和为 target 的两个数集合
-    // 从索引 start 开始
+    // 从索引 start 开始，因为start前面的数都是被
+	// 外层遍历过的，如果满足三数之和，则已经使用了
+	// 后面出现需要它之前的数，那这种情况必然已经收录了
     function twoSum(nums, target, start){
         let left = start
         let right = nums.length - 1

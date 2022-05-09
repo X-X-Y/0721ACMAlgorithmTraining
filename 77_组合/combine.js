@@ -12,7 +12,8 @@ var combine = function(n, k) {
             res.push([...path])
             return
         }
-
+		// 组合不需要used数组，因为每次从start开始而不是从头开始
+		// 所以在同一条路径上，后面的选择不存在与前面重复
         for(let i = start; i <= n; i++){
             path.push(i)
             backtrack(n, k, i+1, path)

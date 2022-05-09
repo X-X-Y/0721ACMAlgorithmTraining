@@ -1,24 +1,66 @@
 /**
- * @param {number[][]} grid
- * @return {number}
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
  */
-var minPathSum = function(grid) {
-    let m = grid.length; let n = grid[0].length
-    // dp[i][j] 到第i行第j列最小数字总和
-    let dp = new Array(m).fill().map(()=>{return new Array(n).fill(Infinity)})
-    dp[0][0] = grid[0][0]
-    for(let i = 1; i < m; i++){
-        dp[i][0] = dp[i-1][0] + grid[i][0]
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+    if(head == null || head.next == null){
+        return head
     }
-    for(let i = 1; i < n; i++){
-        dp[0][i] = dp[0][i-1] + grid[0][i]
+    let dummy = new ListNode(0)
+    dummy.next = head
+    // pre指当前翻转区域头节点的前一个节点
+    pre = dummy
+    // end指当前翻转区域的最后一个节点
+    end = dummy
+
+    // 每次进入循环时，end和pre一样都指向当前翻转区域首节点的前一个节点
+    // 所以end.next是下一个待翻转的首节点，首节点为空，则不用翻转了
+    while(end.next != null){
+        // 首先把end节点指向待翻转区域的最后一个节点
+        for(let i = 0; i < k && end != null; i++){
+            end = end.next
+        }
+        // 说明这轮待翻转的链表长度已经不够k了
+        if(end == null){
+            break
+        }
+        let curend = end
+
+        // 每次循环进来都要用下一个翻转区域首节点，所以在上一轮要准备好
+        let nextstart = end.next
+        // 切断当前翻转区域链表与后面的联系
+        curend.next = null
+        // 准备好当前翻转区域的首节点
+        let curstart = pre.next
+        // 翻转后获得翻转后链表的首节点，将其接到当前翻转区域的后面
+        pre.next = reverse(curstart)
+        // 翻转后原来的首节点就变成了现在的尾节点，同时也是下一个待翻转区域首节点的前一个节点
+        pre = curstart
+        // 翻转后的尾节点与下一个翻转区域首节点连接起来
+        curstart.next = nextstart
+        // 同时更新下一个翻转区域的尾节点与pre同指向
+        end = curstart
     }
 
-    for(let i = 1; i < m; i++){
-        for(let j = 1; j < n; j++){
-            dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
-        }
-    }
-    
-    return dp[m-1][n-1]
+    return dummy.next
 };
+
+function reverse(head){
+    pre = null
+    cur = head
+    while(cur){
+        let next = cur.next
+        cur.next = pre
+        pre = cur
+        cur = next
+    }
+    return pre
+}
