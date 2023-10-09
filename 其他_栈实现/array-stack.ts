@@ -24,12 +24,14 @@ class ArrayStack<T> implements IStack<T> {
   }
 }
 
+export default ArrayStack
+
 const stack1 = new ArrayStack<Number>()
 stack1.push(1)
 stack1.push(23)
 stack1.push(99)
 
-console.log(stack1.pop())
-console.log(stack1.peek())
-console.log(stack1.isEmpty())
-console.log(stack1.size())
+// console.log(stack1.pop())
+// console.log(stack1.peek())
+// console.log(stack1.isEmpty())
+// console.log(stack1.size())
